@@ -1,0 +1,37 @@
+.pure-g {
+    margin-top: 10%;
+}
+
+body {
+    font-family: 'Lato;, sans-serif;
+}
+
+input {
+    font-weight: 300;
+    font-style: italic;
+    width: 286px;
+}
+
+legend {
+    font-weight: 400;
+}
+
+.result {
+    font-weight: 900;
+}
+
+.errors {
+    font-weight: 400;
+    font-style: italic;
+    color: rgb(240, 0, 0);
+}
+
+
+button {
+    height: 37px;
+}
+
+.button-success {
+    background: rgb(60, 179, 113); /* this is a green */
+}
+
