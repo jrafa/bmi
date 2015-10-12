@@ -26,7 +26,6 @@ legend {
     color: rgb(240, 0, 0);
 }
 
-
 button {
     height: 37px;
 }
@@ -34,4 +33,3 @@ button {
 .button-success {
     background: rgb(60, 179, 113); /* this is a green */
 }
-
