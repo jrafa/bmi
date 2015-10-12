@@ -19,6 +19,13 @@ answer = OrderedDict([
 	(40, 'extreme obesity'),
 ])
 
+message = {
+	'404': 'This page does not exist',
+	'500': 'Houston, We\'ve Got a Problem ... Uppps ...!? Sorry :)',
+	'empty_field': 'Please enter all the fields.',
+	'valid_field': 'Please enter valid weight or height. Example 1.6',
+}
+
 
 def get_answer(bmi):
 	n = len(answer)
@@ -26,8 +33,8 @@ def get_answer(bmi):
 	if bmi < answer.items()[0][0]:
 		return answer.items()[0][1]
 
-	if bmi >= answer.items()[n - 1][0]:
-		return answer.items()[n - 1][1]
+	if bmi >= answer.items()[n-1][0]:
+		return answer.items()[n-1][1]
 
 	for key, value in answer.items()[1:n]:
 		if bmi <= key:
@@ -49,10 +56,10 @@ def bmi():
 	height = request.form.get('height')
 
 	if not weight or not height:
-		errors = 'Please enter all the fields.'
+		errors = message['empty_field']
 	else:
 		if not is_field_number(weight) or not is_field_number(height):
-			errors = 'Please enter valid weight or height. Example 1.6'
+			errors = message['valid_field']
 		else:
 			bmi = float(weight) / float(height) ** 2
 			return jsonify(bmi='{0:.2f}'.format(bmi), answer=get_answer(bmi))
@@ -61,12 +68,12 @@ def bmi():
 
 @app.errorhandler(404)
 def page_not_found(error):
-	return 'This page does not exist', 404
+	return message['404'], 404
 
 
 @app.errorhandler(500)
 def houston_we_have_got_a_problem(error):
-	return 'Houston, We\'ve Got a Problem ... Uppps ...!? Sorry :)', 500
+	return message['500'], 500
 
 
 if __name__ == "__main__":
