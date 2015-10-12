@@ -24,6 +24,7 @@ message = {
 	'500': 'Houston, We\'ve Got a Problem ... Uppps ...!? Sorry :)',
 	'empty_field': 'Please enter all the fields.',
 	'valid_field': 'Please enter valid weight or height. Example 1.6',
+	'zero': 'Zero, really?'
 }
 
 
@@ -56,10 +57,12 @@ def bmi():
 	height = request.form.get('height')
 
 	if not weight or not height:
-		errors = message['empty_field']
+		errors = message.get('empty_field')
 	else:
 		if not is_field_number(weight) or not is_field_number(height):
-			errors = message['valid_field']
+			errors = message.get('valid_field')
+		elif float(weight)==0 or float(height)==0:
+			errors = message.get('zero')
 		else:
 			bmi = float(weight) / float(height) ** 2
 			return jsonify(bmi='{0:.2f}'.format(bmi), answer=get_answer(bmi))
@@ -68,12 +71,12 @@ def bmi():
 
 @app.errorhandler(404)
 def page_not_found(error):
-	return message['404'], 404
+	return message.get('404'), 404
 
 
 @app.errorhandler(500)
 def houston_we_have_got_a_problem(error):
-	return message['500'], 500
+	return message.get('500'), 500
 
 
 if __name__ == "__main__":
