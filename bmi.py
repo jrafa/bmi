@@ -73,8 +73,8 @@ def page_not_found(error):
 
 
 @app.errorhandler(500)
-def houston_we_have_got_a_problem(error):
-    return message.get('500'), 500
+def internal_error(error):
+    return message.get('500')
 
 
 if __name__ == "__main__":
