@@ -8,7 +8,7 @@ $(function() {
             data: $('form').serialize(),
             type: 'POST',
             dataType: 'json',
-            success: function(response, bmi) {
+            success: function(response) {
 
                 if (response.errors) {
                     $("#msg").addClass("errors").removeClass("result").text(response.errors);
