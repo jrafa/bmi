@@ -41,7 +41,11 @@ def get_answer(bmi):
 
 
 def is_field_number(field):
-    return True if re.match('\d+\.?\d*', field) else False
+    return re.match('\d+\.?\d*', field)
+
+
+def replace_comma(number):
+    return number.replace(',', '.') if ',' in number else number
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -57,6 +61,9 @@ def bmi():
     if not weight or not height:
         errors = message.get('empty_field')
     else:
+        weight = replace_comma(weight)
+        height = replace_comma(height)
+
         if not is_field_number(weight) or not is_field_number(height):
             errors = message.get('valid_field')
         elif float(weight) == 0 or float(height) == 0:
@@ -78,4 +85,4 @@ def internal_error(error):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='127.0.0.1', port=7000)
